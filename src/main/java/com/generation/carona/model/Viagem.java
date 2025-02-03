@@ -39,6 +39,9 @@ public class Viagem {
 
     @NotNull(message = "A distancia é obrigatória")
     private Float distancia;
+
+    @NotNull(message = "O preço é obrigatório")
+    private Float preco;
     
     public Long getId() {
         return id;
@@ -95,5 +98,15 @@ public class Viagem {
 	public void setDistancia(Float distancia) {
 		this.distancia = distancia;
 	}
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+	
 }
+
 
