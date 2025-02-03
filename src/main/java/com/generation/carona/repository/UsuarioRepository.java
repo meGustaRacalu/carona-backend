@@ -9,4 +9,6 @@ import com.generation.carona.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findByUsuario(String usuario);
+
+    Optional<Usuario> findFirstByUsuario(String usuario);
 }
