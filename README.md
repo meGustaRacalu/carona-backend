@@ -150,7 +150,7 @@ Se tiver dúvidas ou sugestões, entre em contato:
 - **LinkedIn**: [Raquel Morabito](https://www.linkedin.com/in/raquelmorabito)
 - 
 - - **Nome**: Carla
-- **GitHub**: [Carla]((https://github.com/carlajemaitis)
+- **GitHub**: [Carla](https://github.com/carlajemaitis)
 - **LinkedIn**: [Carla](https://www.linkedin.com/)
 - 
 - - **Nome**: Gustavo
