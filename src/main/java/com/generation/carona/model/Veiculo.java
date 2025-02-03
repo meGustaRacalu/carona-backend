@@ -1,6 +1,9 @@
 package com.generation.carona.model;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,6 +35,7 @@ public class Veiculo {
     @Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
     private String placa;
 
+    @JsonIgnoreProperties("veiculo")
     @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Viagem> viagens;
 
