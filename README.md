@@ -163,7 +163,4 @@ Se tiver dúvidas ou sugestões, entre em contato:
 
 ---
 
-**Desenvolvido por [Raquel Morabito](https://github.com/raquelmorabito)**
-**Desenvolvido por [Lucas Unzaga](https://github.com/lucasunzaga)**.
-**Desenvolvido por [Carla Jemaitis](https://github.com/carlajemaitis)**.
-**Desenvolvido por [Gustavo Felipe](https://github.com/Gustav0Felipe)**.
+**Desenvolvido por [Raquel Morabito](https://github.com/raquelmorabito), [Lucas Unzaga](https://github.com/lucasunzaga), [Carla Jemaitis](https://github.com/carlajemaitis), [Gustavo Felipe](https://github.com/Gustav0Felipe)**.
