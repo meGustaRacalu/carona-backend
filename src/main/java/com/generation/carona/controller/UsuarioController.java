@@ -61,15 +61,11 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario usuario) {
-        try {
-            usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); 
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(usuarioRepository.save(usuario));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
+		return usuarioService.cadastrarUsuario(usuario)
+			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
+			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+	}
 
     @PutMapping("/atualizar")
     public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
@@ -86,24 +82,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/logar")
-    public ResponseEntity<?> autenticarUsuario(@RequestBody UsuarioLogin usuarioLogin) {
-        try {
-            Optional<Usuario> usuario = usuarioRepository.findFirstByUsuario(usuarioLogin.getUsuario());
-            if (usuario.isPresent()) {
-                if (passwordEncoder.matches(usuarioLogin.getSenha(), usuario.get().getSenha())) {
-                    String token = "Bearer " + jwtService.generateToken(usuario.get().getUsuario());
-                    Map<String, String> response = new HashMap<>();
-                    response.put("token", token);
-                    return ResponseEntity.ok(response);
-                } else {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
-                }
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas!");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no login.");
-        }
+	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
+		return usuarioService.autenticarUsuario(usuarioLogin)
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
     }
-}
-
