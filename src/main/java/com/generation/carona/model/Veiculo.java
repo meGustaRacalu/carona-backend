@@ -1,42 +1,46 @@
 package com.generation.carona.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_veiculos")
 public class Veiculo {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @NotBlank(message = "O atributo modelo é Obrigatório!") 
-    @Size(min = 2, max = 100, message = "O atributo modelo deve conter no mínimo 2 e no máximo 100 caracteres")
+
+    @NotNull(message = "O Atributo Modelo é obrigatório")
+    @Size(min = 3, max = 100, message = "O modelo deve ter entre 3 e 100 caracteres")
     private String modelo;
-    
-    @NotBlank(message = "O atributo marca é Obrigatório!")
-    @Size(min = 2, max = 50, message = "O atributo marca deve conter no mínimo 2 e no máximo 50 caracteres")
+
+    @NotNull(message = "O Atributo Marca é obrigatório")
+    @Size(min = 3, max = 100, message = "A marca deve ter entre 3 e 100 caracteres")
     private String marca;
-    
-    @NotBlank(message = "O atributo placa é Obrigatório!")
-    @Size(min = 7, max = 7, message = "O atributo placa deve conter exatamente 7 caracteres")
+
+    @NotNull(message = "A Placa é obrigatória")
+    @Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
     private String placa;
-    
-    @UpdateTimestamp
+
     private LocalDateTime dataCadastro;
 
+    @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Viagem> viagens;
+
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -44,7 +48,7 @@ public class Veiculo {
     }
 
     public String getModelo() {
-        return this.modelo;
+        return modelo;
     }
 
     public void setModelo(String modelo) {
@@ -52,7 +56,7 @@ public class Veiculo {
     }
 
     public String getMarca() {
-        return this.marca;
+        return marca;
     }
 
     public void setMarca(String marca) {
@@ -60,7 +64,7 @@ public class Veiculo {
     }
 
     public String getPlaca() {
-        return this.placa;
+        return placa;
     }
 
     public void setPlaca(String placa) {
@@ -68,10 +72,18 @@ public class Veiculo {
     }
 
     public LocalDateTime getDataCadastro() {
-        return this.dataCadastro;
+        return dataCadastro;
     }
 
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 }
