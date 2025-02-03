@@ -37,6 +37,9 @@ public class Viagem {
     @ManyToOne
     private Usuario usuario;
 
+    @NotNull(message = "A distancia é obrigatória")
+    private Float distancia;
+    
     public Long getId() {
         return id;
     }
@@ -84,5 +87,13 @@ public class Viagem {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+	public Float getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(Float distancia) {
+		this.distancia = distancia;
+	}
 }
 
