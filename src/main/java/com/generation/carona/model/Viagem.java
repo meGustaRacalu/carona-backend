@@ -32,6 +32,10 @@ public class Viagem {
     @JoinColumn(name = "veiculo_id", nullable = false)
     private Veiculo veiculo;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
     public Long getId() {
         return id;
     }
@@ -71,4 +75,13 @@ public class Viagem {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
+
