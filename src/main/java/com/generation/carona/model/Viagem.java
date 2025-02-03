@@ -1,17 +1,15 @@
 package com.generation.carona.model;
 
-import java.time.LocalDateTime;
-
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_viagens")
@@ -22,18 +20,16 @@ public class Viagem {
     private Long id;
 
     @NotNull(message = "O Atributo Origem é obrigatório")
-    @Size(min = 3, max = 100, message = "A origem deve ter entre 3 e 100 caracteres")
     private String origem;
 
     @NotNull(message = "O Atributo Destino é obrigatório")
-    @Size(min = 3, max = 100, message = "O destino deve ter entre 3 e 100 caracteres")
     private String destino;
 
     @NotNull(message = "A Data e Hora da partida são obrigatórias")
     private LocalDateTime dataHoraPartida;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "veiculo_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "veiculo_id", nullable = false)
     private Veiculo veiculo;
 
     public Long getId() {

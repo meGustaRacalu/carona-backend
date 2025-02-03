@@ -1,8 +1,6 @@
 package com.generation.carona.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,8 +31,6 @@ public class Veiculo {
     @NotNull(message = "A Placa é obrigatória")
     @Size(min = 7, max = 7, message = "A placa deve ter 7 caracteres")
     private String placa;
-
-    private LocalDateTime dataCadastro;
 
     @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Viagem> viagens;
@@ -71,14 +67,6 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
     public List<Viagem> getViagens() {
         return viagens;
     }
@@ -87,3 +75,4 @@ public class Veiculo {
         this.viagens = viagens;
     }
 }
+
