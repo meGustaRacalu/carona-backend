@@ -39,6 +39,9 @@ public class Veiculo {
     @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Viagem> viagens;
 
+    @NotNull(message = "O preço é obrigatório")
+    private Float preco;
+    
     public Long getId() {
         return id;
     }
@@ -78,5 +81,15 @@ public class Veiculo {
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;
     }
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+    
+    
 }
 
