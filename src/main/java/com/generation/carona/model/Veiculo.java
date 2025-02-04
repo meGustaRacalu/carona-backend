@@ -39,6 +39,9 @@ public class Veiculo {
     @OneToMany(mappedBy = "veiculo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Viagem> viagens;
     
+    @NotNull(message = "A velocidade média é obrigatória")
+    private Integer velocidadeMedia;
+    
     public Long getId() {
         return id;
     }
@@ -78,5 +81,13 @@ public class Veiculo {
     public void setViagens(List<Viagem> viagens) {
         this.viagens = viagens;
     }
+
+	public Integer getVelocidadeMedia() {
+		return velocidadeMedia;
+	}
+
+	public void setVelocidadeMedia(Integer velocidadeMedia) {
+		this.velocidadeMedia = velocidadeMedia;
+	}
 }
 

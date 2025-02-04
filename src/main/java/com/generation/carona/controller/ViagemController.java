@@ -1,5 +1,7 @@
 package com.generation.carona.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.generation.carona.model.Viagem;
+import com.generation.carona.repository.VeiculoRepository;
 import com.generation.carona.repository.ViagemRepository;
 
 import jakarta.validation.Valid;
@@ -21,6 +24,9 @@ public class ViagemController {
     @Autowired
     private ViagemRepository viagemRepository;
 
+    @Autowired 
+    private VeiculoRepository veiculoRepository;
+    
     @GetMapping
     public ResponseEntity<List<Viagem>> getAll() {
         try {
@@ -62,7 +68,15 @@ public class ViagemController {
     @PostMapping
     public ResponseEntity<Viagem> post(@Valid @RequestBody Viagem viagem) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED)
+        	Float preco = (viagem.getDistancia() / 
+        			veiculoRepository.findById(viagem.getVeiculo().getId()).get().getVelocidadeMedia()) * 50;
+        	
+        	BigDecimal bd = new BigDecimal(Float.toString(preco));
+        	bd = bd.setScale(2, RoundingMode.HALF_UP);
+        	
+        	viagem.setPreco(bd.floatValue());
+            
+        	return ResponseEntity.status(HttpStatus.CREATED)
                     .body(viagemRepository.save(viagem));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -72,6 +86,14 @@ public class ViagemController {
     @PutMapping
     public ResponseEntity<Viagem> put(@Valid @RequestBody Viagem viagem) {
         try {
+        	Float preco = (viagem.getDistancia() / 
+        			veiculoRepository.findById(viagem.getVeiculo().getId()).get().getVelocidadeMedia()) * 50;
+        	
+        	BigDecimal bd = new BigDecimal(Float.toString(preco));
+        	bd = bd.setScale(2, RoundingMode.HALF_UP);
+        	
+        	viagem.setPreco(bd.floatValue());
+        	
             return viagemRepository.findById(viagem.getId())
                     .map(resposta -> ResponseEntity.status(HttpStatus.OK)
                             .body(viagemRepository.save(viagem)))

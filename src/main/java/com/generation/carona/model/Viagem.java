@@ -40,8 +40,10 @@ public class Viagem {
     @NotNull(message = "A distancia é obrigatória")
     private Float distancia;
 
-    @NotNull(message = "O preço é obrigatório")
     private Float preco;
+    
+    @NotNull(message = "A imagem é obrigatória")
+    private String image;
     
     public Long getId() {
         return id;
@@ -106,6 +108,15 @@ public class Viagem {
 	public void setPreco(Float preco) {
 		this.preco = preco;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	
 }
 
