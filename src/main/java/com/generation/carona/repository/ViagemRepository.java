@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.generation.carona.model.Viagem;
 
 @Repository
-
 public interface ViagemRepository extends JpaRepository<Viagem, Long> {
 
     List<Viagem> findAllByDestinoContainingIgnoreCase(@Param("destino") String destino);
