@@ -1,15 +1,16 @@
 package com.generation.carona.model;
 
-import jakarta.persistence.FetchType;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_viagens")
@@ -28,14 +29,22 @@ public class Viagem {
     @NotNull(message = "A Data e Hora da partida são obrigatórias")
     private LocalDateTime dataHoraPartida;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "veiculo_id", nullable = false)
+    @JsonIgnoreProperties("viagens")
+    @ManyToOne
     private Veiculo veiculo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnoreProperties("viagens")
+    @ManyToOne
     private Usuario usuario;
 
+    @NotNull(message = "A distancia é obrigatória")
+    private Float distancia;
+
+    private Float preco;
+    
+    @NotNull(message = "A imagem é obrigatória")
+    private String image;
+    
     public Long getId() {
         return id;
     }
@@ -83,5 +92,32 @@ public class Viagem {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+	public Float getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(Float distancia) {
+		this.distancia = distancia;
+	}
+
+	public Float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Float preco) {
+		this.preco = preco;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 }
+
 
