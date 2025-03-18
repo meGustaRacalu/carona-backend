@@ -1,6 +1,6 @@
 package com.generation.carona.model;
 
-import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,7 +27,8 @@ public class Viagem {
     private String destino;
 
     @NotNull(message = "A Data e Hora da partida são obrigatórias")
-    private LocalDateTime dataHoraPartida;
+    @DateTimeFormat
+    private String dataHoraPartida;
 
     @JsonIgnoreProperties("viagens")
     @ManyToOne
@@ -69,11 +70,11 @@ public class Viagem {
         this.destino = destino;
     }
 
-    public LocalDateTime getDataHoraPartida() {
+    public String getDataHoraPartida() {
         return dataHoraPartida;
     }
 
-    public void setDataHoraPartida(LocalDateTime dataHoraPartida) {
+    public void setDataHoraPartida(String dataHoraPartida) {
         this.dataHoraPartida = dataHoraPartida;
     }
 
