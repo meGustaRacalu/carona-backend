@@ -61,6 +61,19 @@ public class ViagemController {
         }
     }
 
+    @GetMapping("/destino/{destino}")
+    public ResponseEntity<List<Viagem>> getByDestino(@PathVariable String destino) {
+        try {
+            List<Viagem> viagens = viagemRepository.findAllByDestinoContainingIgnoreCase(destino);
+            if (viagens.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+            return ResponseEntity.ok(viagens);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<String> post(@Valid @RequestBody Viagem viagem) {
         try {
