@@ -79,7 +79,8 @@ public class ViagemController {
         	return ResponseEntity.status(HttpStatus.CREATED)
                     .body(viagemRepository.save(viagem));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        	System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
