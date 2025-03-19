@@ -66,7 +66,7 @@ public class ViagemController {
     }
 
     @PostMapping
-    public ResponseEntity<Viagem> post(@Valid @RequestBody Viagem viagem) {
+    public ResponseEntity<String> post(@Valid @RequestBody Viagem viagem) {
         try {
         	Float preco = (viagem.getDistancia() / 
         			veiculoRepository.findById(viagem.getVeiculo().getId()).get().getVelocidadeMedia()) * 50;
@@ -77,10 +77,9 @@ public class ViagemController {
         	viagem.setPreco(bd.floatValue());
             
         	return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(viagemRepository.save(viagem));
+                    .body(viagemRepository.save(viagem).toString());
         } catch (Exception e) {
-        	System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
